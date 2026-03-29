@@ -34,7 +34,8 @@ templ Poll(poll *store.Poll, voted bool) {
                     <div class="min-w-40 h-full mb-5 flex flex-col items-center">
                         <label for={ fmt.Sprintf("%d", option.ID) }>
                             <div class="w-40 h-40 overflow-clip">
-                                <img src="https://scmapdb.wdfiles.com/local--resized-images/wad:developer-textures/dev_256_gr_064x.jpg/small.jpg"
+                                //https://scmapdb.wdfiles.com/local--resized-images/wad:developer-textures/dev_256_gr_064x.jpg/small.jpg
+                                <img src={fmt.Sprintf("%s", option.Image)}
                                     class="w-max h-max"
                                 />
                             </div>

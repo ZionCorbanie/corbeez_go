@@ -29,6 +29,7 @@ type PollOption struct {
     PollID uint       `json:"poll_id"`
     Poll   Poll       `gorm:"foreignKey:PollID" json:"poll"`
     Option string     `json:"option" gorm:"type:varchar(255)"`
+	Image  string     `json:"image" gorm:"type:varchar(255)"`
 }
 
 type PollVote struct {
