@@ -24,6 +24,9 @@
     --text-lg--line-height: calc(1.75 / 1.125);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -200,6 +203,12 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
+  .h-45 {
+    height: calc(var(--spacing) * 45);
+  }
+  .h-50 {
+    height: calc(var(--spacing) * 50);
+  }
   .h-full {
     height: 100%;
   }
@@ -270,13 +279,38 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-0 {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
+  }
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
+  }
+  .border-3 {
+    border-style: var(--tw-border-style);
+    border-width: 3px;
+  }
+  .border-4 {
+    border-style: var(--tw-border-style);
+    border-width: 4px;
+  }
+  .border-5 {
+    border-style: var(--tw-border-style);
+    border-width: 5px;
   }
   .border-black {
     border-color: var(--color-black);
@@ -298,6 +332,9 @@
   }
   .border-gray-800 {
     border-color: var(--color-gray-800);
+  }
+  .border-transparent {
+    border-color: transparent;
   }
   .bg-primary-600 {
     background-color: oklch(54.6% 0.245 262.881);
@@ -339,6 +376,34 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .group-has-checked\:border-2 {
+    &:is(:where(.group):has(*:checked) *) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+  }
+  .group-has-checked\:border-blue-500 {
+    &:is(:where(.group):has(*:checked) *) {
+      border-color: var(--color-blue-500);
+    }
+  }
+  .group-has-checked\:border-blue-600 {
+    &:is(:where(.group):has(*:checked) *) {
+      border-color: var(--color-blue-600);
+    }
+  }
+  .peer-checked\:border-2 {
+    &:is(:where(.peer):checked ~ *) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+  }
+  .peer-has-checked\:border-2 {
+    &:is(:where(.peer):has(*:checked) ~ *) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+  }
   .hover\:bg-slate-100 {
     &:hover {
       @media (hover: hover) {
@@ -351,6 +416,12 @@
       @media (hover: hover) {
         background-color: var(--color-stone-100);
       }
+    }
+  }
+  .has-checked\:border-2 {
+    &:has(*:checked) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
     }
   }
 }
