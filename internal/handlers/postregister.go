@@ -21,10 +21,10 @@ func NewPostRegisterHandler(params PostRegisterHandlerParams) *PostRegisterHandl
 }
 
 func (h *PostRegisterHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	email := r.FormValue("email")
+	name := r.FormValue("name")
 	password := r.FormValue("password")
 
-	err := h.userStore.CreateUser(email, password)
+	err := h.userStore.CreateUser(name, password)
 
 	if err != nil {
 

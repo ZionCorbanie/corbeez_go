@@ -4,7 +4,7 @@ import "time"
 
 type User struct {
 	ID       uint   `gorm:"primaryKey" json:"id"`
-	Email    string `json:"email"`
+	Name    string `json:"name"`
 	Password string `json:"-"`
 	UserType    string    `json:"user_type" gorm:"type:enum('admin','user');default:user"`
 }
@@ -43,8 +43,8 @@ type PollVote struct {
 }
 
 type UserStore interface {
-	CreateUser(email string, password string) error
-	GetUser(email string) (*User, error)
+	CreateUser(name string, password string) error
+	GetUser(name string) (*User, error)
 }
 
 type SessionStore interface {

@@ -1,49 +1,41 @@
 package templates
 
-templ Login(title string) {
+templ Login() {
 	<div hx-ext="response-targets">
-		<h1>
-			Sign in to your account
-		</h1>
 		<form
 			hx-post="/login"
 			hx-trigger="submit"
 			hx-target-401="#login-error"
+            class="flex flex-col items-center mt-10"
 		>
-			<div id="login-error"></div>
-			<div>
-				<label for="email">Your email</label>
-				<input
-					type="email"
-					name="email"
-					id="email"
-					placeholder="name@company.com"
-					required=""
-					autocomplete="email"
-				/>
-			</div>
-			<div>
-				<label for="password">Password</label>
-				<input
-					type="password"
-					name="password"
-					id="password"
-					placeholder="••••••••"
-					required=""
-					autocomplete="current-password"
-				/>
-			</div>
-			<button type="submit">
-				Sign in
+            <label for="name">Naam</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Naam"
+                required=""
+                autocomplete="name"
+                class="rounded-full mb-5"
+            />
+            <label for="password">Paswoord</label>
+            <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="••••••••"
+                required=""
+                autocomplete="current-password"
+                class="rounded-full mb-5"
+            />
+			<button type="submit" class="p-2 border-2 w-30 border-blue-600 rounded-full hover:bg-slate-100">
+				Inloggen
 			</button>
-			<p>
-				Don’t have an account yet?
-				<a href="/register">Register</a>
-			</p>
+			<div id="login-error" class="text-red-600"></div>
 		</form>
 	</div>
 }
 
 templ LoginError() {
-	<p>Invalid email or password</p>
+	<p>Foute naam of paswoord</p>
 }

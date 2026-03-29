@@ -76,8 +76,6 @@ func main() {
 
 		r.Get("/", handlers.NewHomeHandler().ServeHTTP)
 
-		r.Get("/about", handlers.NewAboutHandler().ServeHTTP)
-
 		r.Get("/register", handlers.NewGetRegisterHandler().ServeHTTP)
 
 		r.Post("/register", handlers.NewPostRegisterHandler(handlers.PostRegisterHandlerParams{

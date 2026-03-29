@@ -6,6 +6,7 @@ import (
 	"goth/internal/templates"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -63,6 +64,15 @@ func (h *PollHandler) Vote(w http.ResponseWriter, r *http.Request) {
     poll, voted := h.pollStore.GetPollVotes(uint(pollId), user.ID)
 	if poll == nil || voted{
         http.Error(w, "Error voting", http.StatusBadRequest)
+		return
+	}
+
+	if time.Now().Before(poll.StartDate){
+        http.Error(w, "Te vroeg", http.StatusBadRequest)
+		return
+	}else if time.Now().After(poll.EndDate){
+        http.Error(w, "Te laat", http.StatusBadRequest)
+		return
 	}
 
     err = h.pollStore.VotePoll(uint(pollId), uint(option), user.ID)

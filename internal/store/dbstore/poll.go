@@ -93,6 +93,7 @@ func (s *PollStore) VotePoll(pollId uint, optionId uint, userId uint) error {
         PollID:  pollId,
         OptionID:   optionId,
         UserID:   userId,
+		Time: time.Now(),
         
     }).Error; err != nil {
         tx.Rollback()

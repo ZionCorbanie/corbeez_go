@@ -30,7 +30,7 @@ func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	c := templates.Index(user.Email)
+	c := templates.Index(user.Name)
 	err := templates.Layout(c, "Corbeez").Render(r.Context(), w)
 
 	if err != nil {

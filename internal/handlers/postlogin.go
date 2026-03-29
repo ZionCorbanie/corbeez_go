@@ -35,10 +35,10 @@ func NewPostLoginHandler(params PostLoginHandlerParams) *PostLoginHandler {
 
 func (h *PostLoginHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	email := r.FormValue("email")
+	name := r.FormValue("name")
 	password := r.FormValue("password")
 
-	user, err := h.userStore.GetUser(email)
+	user, err := h.userStore.GetUser(name)
 
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)

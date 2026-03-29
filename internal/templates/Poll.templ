@@ -11,14 +11,16 @@ templ Poll(poll *store.Poll, voted bool) {
         <br>
         if voted{
             <div class="text-center">Stem opgeslagen</div>
-            <button type="button" class="mx-auto mb-5 mt-10 border-black border p-1 px-5 rounded-full hover:bg-stone-100"
-                hx-delete={ fmt.Sprintf("/poll/%d", poll.ID) }
-                hx-confirm="Stem verwijderen?"
-                hx-target="body"
-                hx-swap="outerHTML"
-                >
-                Stem aanpassen
-            </button>
+            <div class="mx-auto flex justify-center">
+                <button type="button" class="self-center mx-auto mb-5 mt-10 border-black border p-1 px-5 rounded-full hover:bg-stone-100"
+                    hx-delete={ fmt.Sprintf("/poll/%d", poll.ID) }
+                    hx-confirm="Stem verwijderen?"
+                    hx-target="body"
+                    hx-swap="outerHTML"
+                    >
+                    Stem aanpassen
+                </button>
+            </div>
         }else {
             <form class="w-full flex flex-col items-center"
                 hx-post={ fmt.Sprintf("/poll/%d", poll.ID) }

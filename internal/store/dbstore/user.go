@@ -24,7 +24,7 @@ func NewUserStore(params NewUserStoreParams) *UserStore {
 	}
 }
 
-func (s *UserStore) CreateUser(email string, password string) error {
+func (s *UserStore) CreateUser(name string, password string) error {
 
 	hashedPassword, err := s.passwordhash.GenerateFromPassword(password)
 	if err != nil {
@@ -32,15 +32,15 @@ func (s *UserStore) CreateUser(email string, password string) error {
 	}
 
 	return s.db.Create(&store.User{
-		Email:    email,
+		Name:    name,
 		Password: hashedPassword,
 	}).Error
 }
 
-func (s *UserStore) GetUser(email string) (*store.User, error) {
+func (s *UserStore) GetUser(name string) (*store.User, error) {
 
 	var user store.User
-	err := s.db.Where("email = ?", email).First(&user).Error
+	err := s.db.Where("name = ?", name).First(&user).Error
 
 	if err != nil {
 		return nil, err
