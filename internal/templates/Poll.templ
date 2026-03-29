@@ -30,10 +30,9 @@ templ Poll(poll *store.Poll, voted bool) {
                 >
                 <div class="flex flex-row flex-wrap justify-between mx-auto px-4">
                 for _, option := range poll.Options {
-                    <div class="min-w-40 h-full mb-5 flex flex-col items-center group">
+                    <div class="w-40 h-full mb-5 flex flex-col items-center group">
                         <label for={ fmt.Sprintf("%d", option.ID) }>
                             <div class="w-40 h-45 rounded-xl overflow-clip border-3 border-transparent group-has-checked:border-blue-600">
-                                //https://scmapdb.wdfiles.com/local--resized-images/wad:developer-textures/dev_256_gr_064x.jpg/small.jpg
                                 <img src={fmt.Sprintf("%s", option.Image)}
                                     class="w-max h-max"
                                 />
