@@ -1,3 +1,7 @@
+networks:
+  db:
+    driver: bridge
+
 services:
   app:
     build:
@@ -8,6 +12,50 @@ services:
       - /app/node_modules
     environment:
       - ENVIRONMENT=development
+      - TZ=Europe/Amsterdam
+      - DB_DATABASE=goth.db
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB=db
+      - DB_PORT=3306
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "80:4000"
+      - "9091:9091"
+    networks:
+      - db
     tty: true
+
+  db:
+    image: mariadb
+    container_name: corbeez_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: goth.db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - db
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized" ]
+      start_period: 5s
+      timeout: 5s
+      retries: 50
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - 3333:80
+    networks:
+      - db
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORT: password

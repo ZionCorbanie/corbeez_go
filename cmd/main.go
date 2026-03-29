@@ -53,6 +53,12 @@ func main() {
 		},
 	)
 
+	pollStore := dbstore.NewPollStore(
+		dbstore.NewPollStoreParams{
+			DB: db,
+		},
+	)
+
 	fileServer := http.FileServer(http.Dir("./static"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fileServer))
 
@@ -90,6 +96,21 @@ func main() {
 		r.Post("/logout", handlers.NewPostLogoutHandler(handlers.PostLogoutHandlerParams{
 			SessionCookieName: cfg.SessionCookieName,
 		}).ServeHTTP)
+
+		r.Group(func(r chi.Router) {
+			r.Use(authMiddleware.LoggedIn)
+
+			r.Route("/poll", func(r chi.Router) {
+				handler := handlers.NewPollHandler(handlers.PollHandlerParams{
+						PollStore: pollStore,
+					},)
+				r.Get("/", handler.Show)
+				r.Route("/{pollId}", func(r chi.Router) {
+					r.Post("/", handler.Vote)
+					r.Delete("/", handler.RemoveVote)
+				})
+			})
+		})
 	})
 
 	killSig := make(chan os.Signal, 1)

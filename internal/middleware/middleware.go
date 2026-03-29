@@ -143,9 +143,6 @@ func (m *AuthMiddleware) AddUserToContext(next http.Handler) http.Handler {
 		sessionID := splitValue[0]
 		userID := splitValue[1]
 
-		fmt.Println("sessionID", sessionID)
-		fmt.Println("userID", userID)
-
 		user, err := m.sessionStore.GetUserFromSession(sessionID, userID)
 
 		if err != nil {
@@ -159,6 +156,20 @@ func (m *AuthMiddleware) AddUserToContext(next http.Handler) http.Handler {
 	})
 }
 
+func (m *AuthMiddleware) LoggedIn(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_, ok := r.Context().Value(UserKey).(*store.User)
+
+		if !ok {
+            target := r.URL.Path
+            http.Redirect(w, r, fmt.Sprintf("/login?redirect=%s", target), http.StatusFound)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 func GetUser(ctx context.Context) *store.User {
 	user := ctx.Value(UserKey)
 	if user == nil {
@@ -166,4 +177,13 @@ func GetUser(ctx context.Context) *store.User {
 	}
 
 	return user.(*store.User)
+}
+
+func IsAdmin(ctx context.Context) bool {
+	user := GetUser(ctx)
+	if user == nil {
+		return false
+	}
+
+	return user.UserType == "admin"
 }

@@ -51,9 +51,9 @@ templ nav() {
 
 templ Layout(contents templ.Component, title string) {
 	@header(title)
-	<body class="flex flex-col h-full">
+	<body class="flex flex-col h-screen">
 		@nav()
-		<main class="flex-1 container ">
+		<main class="flex flex-grow flex-col items-center">
 			@contents
 		</main>
 		@footer()

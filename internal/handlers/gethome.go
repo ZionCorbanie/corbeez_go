@@ -20,7 +20,7 @@ func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		c := templates.GuestIndex()
 
-		err := templates.Layout(c, "My website").Render(r.Context(), w)
+		err := templates.Layout(c, "Corbeez.be").Render(r.Context(), w)
 
 		if err != nil {
 			http.Error(w, "Error rendering template", http.StatusInternalServerError)
@@ -31,7 +31,7 @@ func (h *HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	c := templates.Index(user.Email)
-	err := templates.Layout(c, "My website").Render(r.Context(), w)
+	err := templates.Layout(c, "Corbeez").Render(r.Context(), w)
 
 	if err != nil {
 		http.Error(w, "Error rendering template", http.StatusInternalServerError)

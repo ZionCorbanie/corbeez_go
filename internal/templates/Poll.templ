@@ -1,0 +1,51 @@
+package templates
+
+import "goth/internal/store"
+import "fmt"
+
+templ Poll(poll *store.Poll, voted bool) {
+    <div class="mx-auto max-w-4xl mt-5 h-full">
+        <div class="text-2xl mx-auto text-center"> { poll.Title } </div>
+
+        <br>
+        if voted{
+            <div class="text-center">Stem opgeslagen</div>
+            <button type="button" class="mx-auto mb-5 mt-10 border-black border p-1 px-5 rounded-full hover:bg-stone-100"
+                hx-delete={ fmt.Sprintf("/poll/%d", poll.ID) }
+                hx-confirm="Stem verwijderen?"
+                hx-target="body"
+                hx-swap="outerHTML"
+                >
+                Stem aanpassen
+            </button>
+        }else {
+            <form class="w-full flex flex-col items-center"
+                hx-post={ fmt.Sprintf("/poll/%d", poll.ID) }
+                hx-confirm="Je gaat verzenden"
+                hx-trigger="submit"
+                hx-target="body"
+                hx-swap="outerHTML"
+                >
+                <div class="flex flex-row flex-wrap justify-between mx-auto px-4">
+                for _, option := range poll.Options {
+                    <div class="min-w-40 h-full mb-5 flex flex-col items-center">
+                        <label for={ fmt.Sprintf("%d", option.ID) }>
+                            <div class="w-40 h-40 overflow-clip">
+                                <img src="https://scmapdb.wdfiles.com/local--resized-images/wad:developer-textures/dev_256_gr_064x.jpg/small.jpg"
+                                    class="w-max h-max"
+                                />
+                            </div>
+                            <div class="text-center">{ option.Option }</div>
+                        </label>
+                        <input type="radio" 
+                            name="option" 
+                            value={ fmt.Sprintf("%d", option.ID) } 
+                            id={ fmt.Sprintf("%d", option.ID) }>
+                    </div>
+                }
+                </div>
+                <input type="submit" value="Stem" class="mx-auto mb-5 border-black border p-1 px-5 rounded-full hover:bg-stone-100">
+            </form>
+        }
+    </div>
+}
