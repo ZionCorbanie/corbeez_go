@@ -24,7 +24,6 @@ templ Poll(poll *store.Poll, voted bool) {
         }else {
             <form class="w-full flex flex-col items-center"
                 hx-post={ fmt.Sprintf("/poll/%d", poll.ID) }
-                hx-confirm="Je gaat verzenden"
                 hx-trigger="submit"
                 hx-target="body"
                 hx-swap="outerHTML"
