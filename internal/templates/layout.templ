@@ -22,14 +22,16 @@ templ footer() {
 
 templ nav() {
 	<nav class="bg-primary-600 p-4">
-		<div class="container flex justify-between">
+		<div class="container flex justify-between max-w-4xl mx-auto">
 			<ol class="flex space-x-4">
 				<li>
 					<a class="text-gray-200" href="/">Home</a>
 				</li>
-				<li>
-					<a class="text-gray-200" href="/about">About</a>
-				</li>
+				if middleware.GetUser(ctx) != nil {
+                    <li>
+                        <a class="text-gray-200" href="/poll">Mol</a>
+                    </li>
+                }
 			</ol>
 			<ol class="flex space-x-4">
 				if middleware.GetUser(ctx) != nil {
@@ -37,9 +39,6 @@ templ nav() {
 						<button class="text-gray-200" hx-target="body" hx-swap="innerHTML" hx-post="/logout">Logout</button>
 					</li>
 				} else {
-					<li>
-						<a class="text-gray-200" href="/register">Register</a>
-					</li>
 					<li>
 						<a class="text-gray-200" href="/login">Login</a>
 					</li>

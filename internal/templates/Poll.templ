@@ -6,7 +6,8 @@ import "fmt"
 templ Poll(poll *store.Poll, voted bool) {
     <div class="mx-auto max-w-4xl mt-5 h-full">
         <div class="text-2xl mx-auto text-center"> { poll.Title } </div>
-
+        <div class="text-lg mx-auto text-center"> Stem voor zondag 20:00 </div>
+        
         <br>
         if voted{
             <div class="text-center">Stem opgeslagen</div>

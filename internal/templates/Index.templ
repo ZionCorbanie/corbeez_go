@@ -1,14 +1,15 @@
 package templates
 
 templ Index(email string) {
-		<div>
-		Welcome {email}
-		</div>
-
+	<div class="flex flex-col items-center mt-5">
+	    <h1 class="text-2xl">Welkom {email}</h1>
+	    <p class="">Ja er is nog niet zo veel</p>
+	</div>
 }
 
 templ GuestIndex() {
-	<div>
-	Welcome guest
+	<div class="flex flex-col items-center mt-5">
+	    <h1 class="text-2xl">Welkom op de Corbeez site</h1>
+	    <p class="">Log in om meer te zien</p>
 	</div>
 }
