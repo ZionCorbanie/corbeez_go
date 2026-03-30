@@ -12,7 +12,7 @@ templ Poll(poll *store.Poll, voted bool) {
         if voted{
             <div class="text-center">Stem opgeslagen</div>
             <div class="mx-auto flex justify-center">
-                <button type="button" class="self-center mx-auto mb-5 mt-10 border-black border p-1 px-5 rounded-full hover:bg-stone-100"
+                <button type="button" class="self-center mx-auto mb-5 mt-10 border-white border p-1 px-5 rounded-full hover:bg-stone-700 hover:cursor-pointer"
                     hx-delete={ fmt.Sprintf("/poll/%d", poll.ID) }
                     hx-confirm="Stem verwijderen?"
                     hx-target="body"
@@ -46,7 +46,7 @@ templ Poll(poll *store.Poll, voted bool) {
                     </div>
                 }
                 </div>
-                <input type="submit" value="Stem" class="mx-auto mb-5 border-black border p-1 px-5 rounded-full hover:bg-stone-100">
+                <input type="submit" value="Stem" class="self-center mx-auto mb-5 mt-10 border-white border p-1 px-5 rounded-full hover:bg-stone-700 hover:cursor-pointer">
             </form>
         }
     </div>

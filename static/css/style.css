@@ -10,9 +10,13 @@
     --color-red-600: oklch(57.7% 0.245 27.325);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-slate-100: oklch(96.8% 0.007 247.896);
+    --color-slate-700: oklch(37.2% 0.044 257.287);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-stone-100: oklch(97% 0.001 106.424);
+    --color-stone-700: oklch(37.4% 0.01 67.558);
+    --color-stone-900: oklch(21.6% 0.006 56.043);
     --color-black: #000;
+    --color-white: #fff;
     --spacing: 0.25rem;
     --container-4xl: 56rem;
     --text-lg: 1.125rem;
@@ -220,9 +224,6 @@
   .max-w-4xl {
     max-width: var(--container-4xl);
   }
-  .min-w-40 {
-    min-width: calc(var(--spacing) * 40);
-  }
   .flex-grow {
     flex-grow: 1;
   }
@@ -284,8 +285,17 @@
   .border-transparent {
     border-color: transparent;
   }
+  .border-white {
+    border-color: var(--color-white);
+  }
   .bg-primary-600 {
     background-color: oklch(54.6% 0.245 262.881);
+  }
+  .bg-slate-700 {
+    background-color: var(--color-slate-700);
+  }
+  .bg-stone-900 {
+    background-color: var(--color-stone-900);
   }
   .p-1 {
     padding: calc(var(--spacing) * 1);
@@ -319,6 +329,9 @@
   .text-red-600 {
     color: var(--color-red-600);
   }
+  .text-white {
+    color: var(--color-white);
+  }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -329,6 +342,13 @@
       border-color: var(--color-blue-600);
     }
   }
+  .hover\:cursor-pointer {
+    &:hover {
+      @media (hover: hover) {
+        cursor: pointer;
+      }
+    }
+  }
   .hover\:bg-slate-100 {
     &:hover {
       @media (hover: hover) {
@@ -336,10 +356,24 @@
       }
     }
   }
+  .hover\:bg-slate-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-700);
+      }
+    }
+  }
   .hover\:bg-stone-100 {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-stone-100);
+      }
+    }
+  }
+  .hover\:bg-stone-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-stone-700);
       }
     }
   }
