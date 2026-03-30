@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"goth/internal/middleware"
 	"goth/internal/store"
 	"goth/internal/templates"
@@ -101,4 +102,40 @@ func (h *PollHandler) RemoveVote(w http.ResponseWriter, r *http.Request) {
     }
 
     http.Redirect(w, r, "/poll", http.StatusSeeOther)
+}
+
+func (h *PollHandler) ShowVotes(w http.ResponseWriter, r *http.Request){
+	pollIdStr := chi.URLParam(r, "pollId")
+    pollId, err := strconv.ParseInt(pollIdStr, 10, 64)
+	poll, err := h.pollStore.GetPoll(pollIdStr)
+	if err != nil{
+		return
+	}
+
+	votes := h.pollStore.GetVotes(uint(pollId))
+
+    var voteCounts = make(map[uint] int)
+	for _, vote := range *votes{
+		_, ok := voteCounts[vote.OptionID]
+		if !ok{
+			voteCounts[vote.OptionID] = 0
+		}
+		voteCounts[vote.OptionID] ++
+	}
+
+	maxVotes := 0
+	for _, v := range voteCounts{
+		if v>maxVotes{
+			maxVotes = v
+		}
+	}
+	fmt.Println(maxVotes)
+
+
+	c := templates.Votes(poll, voteCounts, maxVotes)
+	err = c.Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, "Error rendering template", http.StatusInternalServerError)
+		return
+	}
 }

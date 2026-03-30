@@ -1,6 +1,7 @@
 package dbstore
 
 import (
+	"fmt"
 	"goth/internal/store"
 	"time"
 
@@ -127,6 +128,18 @@ func (s *PollStore) GetPollVotes(pollID uint, userID uint) (*store.Poll, bool) {
         Scan(&userVoteExists)
 
     return &poll, userVoteExists
+}
+
+func (s *PollStore) GetVotes(pollID uint) *[]store.PollVote{
+	var votes []store.PollVote
+
+	err := s.db.Where("poll_id = ?", pollID).Find(&votes).Error
+	if err != nil{
+		fmt.Println("Erro in query")
+		return nil
+	}
+
+	return &votes
 }
 
 func (s *PollStore) DeletePollVote(pollId uint, userId uint) error{

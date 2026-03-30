@@ -1,7 +1,9 @@
 package templates
 
-import "goth/internal/store"
-import "fmt"
+import (
+    "goth/internal/store"
+    "fmt"
+)
 
 templ Poll(poll *store.Poll, voted bool) {
     <div class="mx-auto max-w-4xl mt-5 h-full">
@@ -20,6 +22,12 @@ templ Poll(poll *store.Poll, voted bool) {
                     >
                     Stem aanpassen
                 </button>
+            </div>
+            <div 
+                hx-trigger="load"
+                hx-swap="outerHTML"
+                hx-get={ fmt.Sprintf("/poll/%d/votes", poll.ID) }
+                >
             </div>
         }else {
             <form class="w-full flex flex-col items-center"
@@ -49,5 +57,28 @@ templ Poll(poll *store.Poll, voted bool) {
                 <input type="submit" value="Stem" class="self-center mx-auto mb-5 mt-10 border-white border p-1 px-5 rounded-full hover:bg-stone-700 hover:cursor-pointer">
             </form>
         }
+    </div>
+}
+
+templ Votes(poll *store.Poll, votes map[uint]int, maxCount int){
+    <div class="mx-auto w-screen px-10 overflow-x-scroll md:max-w-4xl h-80 flex flex-row flex-nowrap space-x-5">
+    for _, option := range poll.Options {
+        {{ 
+            count := votes[option.ID] 
+            perc := 0
+            if maxCount > 0{
+                perc = (100*count)/maxCount
+            }
+
+        }}
+
+        <div class="flex flex-col items-end">
+            <div class="flex-1 w-4 self-center">
+                <div class="" style={ fmt.Sprintf("height: %d%%", 100-perc) }></div>
+                <div class="bg-blue-600 rounded-full" style={ fmt.Sprintf("height: %d%%", perc) }></div>
+            </div>
+            <div class="text-center">{ option.Option } { count }</div>
+        </div>
+    }
     </div>
 }

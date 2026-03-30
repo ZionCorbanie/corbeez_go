@@ -63,4 +63,5 @@ type PollStore interface {
     GetPollVotes(pollID uint, userID uint) (*Poll, bool)
     DeletePollVote(pollId uint, userId uint) error
     GetActivePoll() (*Poll, error)
+	GetVotes(pollID uint) *[]PollVote
 }
