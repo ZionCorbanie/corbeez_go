@@ -297,6 +297,9 @@
   .bg-stone-900 {
     background-color: var(--color-stone-900);
   }
+  .object-cover {
+    object-fit: cover;
+  }
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }

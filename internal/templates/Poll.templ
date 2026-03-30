@@ -34,7 +34,7 @@ templ Poll(poll *store.Poll, voted bool) {
                         <label for={ fmt.Sprintf("%d", option.ID) }>
                             <div class="w-40 h-45 rounded-xl overflow-clip border-3 border-transparent group-has-checked:border-blue-600">
                                 <img src={fmt.Sprintf("%s", option.Image)}
-                                    class="w-max h-max"
+                                    class="w-full h-full object-cover"
                                 />
                             </div>
                             <div class="text-center">{ option.Option }</div>
