@@ -12,8 +12,8 @@ templ Poll(poll *store.Poll, voted bool) {
         
         <br>
         if voted{
-            <div class="text-center">Stem opgeslagen</div>
-            <div class="mx-auto flex justify-center">
+            <div class="text-center mb-10">Stem opgeslagen</div>
+            /*<div class="mx-auto flex justify-center">
                 <button type="button" class="self-center mx-auto mb-5 mt-10 border-white border p-1 px-5 rounded-full hover:bg-stone-700 hover:cursor-pointer"
                     hx-delete={ fmt.Sprintf("/poll/%d", poll.ID) }
                     hx-confirm="Stem verwijderen?"
@@ -22,7 +22,7 @@ templ Poll(poll *store.Poll, voted bool) {
                     >
                     Stem aanpassen
                 </button>
-            </div>
+            </div>*/
             <div 
                 hx-trigger="load"
                 hx-swap="outerHTML"
@@ -80,5 +80,8 @@ templ Votes(poll *store.Poll, votes map[uint]int, maxCount int){
             <div class="text-center">{ option.Option } { count }</div>
         </div>
     }
+    </div>
+    <div class="w-70 h-10 border-white border-2 flex justify-between items-center p-2 mt-10">
+        <span>Papa's-Mol-Ligt-Eruit-Counter: </span> <span class="font-bold">0</span>
     </div>
 }

@@ -105,7 +105,7 @@ func main() {
 				r.Get("/", handler.Show)
 				r.Route("/{pollId}", func(r chi.Router) {
 					r.Post("/", handler.Vote)
-					r.Delete("/", handler.RemoveVote)
+					// r.Delete("/", handler.RemoveVote)
 					r.Get("/votes", handler.ShowVotes)
 				})
 			})
